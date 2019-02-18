@@ -27,10 +27,42 @@ public class CashMachine {
                 () -> bank.getAccountById(id),
                 update
         );
+        //System.out.println("LOGIN: ");
+
     }
 
-    public void deposit(int amount) {
+    public String loginId(int id) {
+        return bank.getID( id ).toString();
+    }
+
+
+    public String loginEmail(int id) {
+        return bank.getEmail( id );
+    }
+
+    public String loginName(int id) {
+        return bank.getName( id );
+    }
+
+    public String loginBalance(int id) {
+        return bank.getBalance2( id ).toString();
+    }
+
+
+    public void getBalance(int id) {
         if (accountData != null) {
+            tryCall(
+                    () -> bank.getBalance(accountData),
+                    update
+            );
+        }
+    }
+
+
+    public void deposit(Double amount) {
+        System.out.println("CashMachine.java 1." + accountData);
+        if (accountData != null) {
+            System.out.println("CashMachine.java 2.");
             tryCall(
                     () -> bank.deposit(accountData, amount),
                     update
@@ -55,6 +87,7 @@ public class CashMachine {
 
     @Override
     public String toString() {
+        //
         return accountData != null ? accountData.toString() : "Try account 1000 or 2000 and click submit.";
     }
 
@@ -72,4 +105,6 @@ public class CashMachine {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+
 }

@@ -15,13 +15,32 @@ public abstract class Account {
         return accountData;
     }
 
-    public void deposit(int amount) {
-        updateBalance(getBalance() + amount);
+    public Integer getAccountDataId() {
+        return accountData.getId();
+    }
+
+    public String getAccountDataName() {
+        return accountData.getName();
+    }
+
+    public String getAccountDataEmail() {
+        return accountData.getEmail();
+    }
+
+    public Double getAccountDataBalance() {
+        return accountData.getBalance();
+    }
+
+
+
+    public void deposit(Double amount) {
+        updateBalance( getBalance() + amount);
     }
 
     public boolean withdraw(int amount) {
         if (canWithdraw(amount)) {
-            updateBalance(getBalance() - amount);
+            updateBalance((double) (getBalance() - amount));
+            System.out.println( "getBalance(): " + getBalance() + " amount: " + amount );
             return true;
         } else {
             return false;
@@ -32,11 +51,11 @@ public abstract class Account {
         return getBalance() >= amount;
     }
 
-    public int getBalance() {
+    public Double getBalance() {
         return accountData.getBalance();
     }
 
-    private void updateBalance(int newBalance) {
+    private void updateBalance(Double newBalance) {
         accountData = new AccountData(accountData.getId(), accountData.getName(), accountData.getEmail(),
                 newBalance);
     }
